@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/GabrielCampos99/ReactJS-Solid-TDD/issues"
   },
-  "homepage": "https://github.com/GabrielCampos99/ReactJS-Solid-TDD#readme"
+  "homepage": "https://github.com/GabrielCampos99/ReactJS-Solid-TDD#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^4.0.7"
+  }
 }
