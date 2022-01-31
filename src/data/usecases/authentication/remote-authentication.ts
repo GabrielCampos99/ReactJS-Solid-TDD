@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { HttpPostClient } from '../../protocols/http/http-post-client'
+import { HttpPostClient } from 'data/protocols/http/http-post-client'
 
 export class RemoteAuthentication {
   constructor (
     private readonly url: string,
-    private readonly HttpPostClient: HttpPostClient) { }
+    private readonly httpPostClient: HttpPostClient
+  ) {}
 
   async auth (): Promise<void> {
-    await this.HttpPostClient.post(this.url)
+    await this.httpPostClient.post(this.url)
   }
 }

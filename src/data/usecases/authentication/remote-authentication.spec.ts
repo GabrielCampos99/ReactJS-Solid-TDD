@@ -1,24 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { HttpPostClientSpy } from '../../test/mock-http-client'
 import { RemoteAuthentication } from './remote-authentication'
-
-type SutTypes={
-  sut: RemoteAuthentication
-  httpPostClientSpy: HttpPostClientSpy
-}
-
-const makeSut = (url: string = 'any_url'): SutTypes => {
-  const httpPostClientSpy = new HttpPostClientSpy()
-  const sut = new RemoteAuthentication(url, httpPostClientSpy)
-
-  return { sut, httpPostClientSpy }
-}
+import { HttpPostClient } from 'data/protocols/http/http-post-client'
 
 describe('RemoteAuthentication', () => {
-  test('Should call HttpPostClient with correct url', async () => {
+  test('Should call HttpPostClient with correct URL', async () => {
+    class HttpPostClientSpy implements HttpPostClient {
+      url?: string
+
+      async post (url: string): Promise<void> {
+        this.url = url
+        return Promise.resolve()
+      }
+    }
     const url = 'any_url'
-    const { sut, httpPostClientSpy } = makeSut()
+    const httpPostClientSpy = new HttpPostClientSpy()
+    const sut = new RemoteAuthentication(url, httpPostClientSpy)
     await sut.auth()
     expect(httpPostClientSpy.url).toBe(url)
   })
