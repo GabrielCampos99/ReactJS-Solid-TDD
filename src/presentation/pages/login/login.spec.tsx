@@ -10,5 +10,7 @@ describe('Login Component', () => {
     expect(screen.getByRole('button')).toHaveProperty('disabled')
     expect(screen.getByPlaceholderText(/Digite seu e-mail/i))
     expect(screen.getByPlaceholderText(/Digite sua senha/i))
+    expect(screen.getByTestId('email-status').textContent).toBe('🔴')
+    expect(screen.getByTestId('password-status').textContent).toBe('🔴')
   })
 })
