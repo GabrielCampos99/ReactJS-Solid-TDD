@@ -19,8 +19,8 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('get', () => {
-  test('should call axios with correct values', async () => {
+describe('AxiosHttpClient', () => {
+  test('Should call axios with correct values', async () => {
     const request = mockPostRequest()
     const { sut, mockedAxios } = makeSut()
     await sut.post(request)
