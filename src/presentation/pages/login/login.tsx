@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Styles from './login-styles.scss'
 import { Footer, Input, LoginHeader, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
@@ -7,22 +7,24 @@ import { Validation } from '../protocols/validation'
 type Props = {
   validation: Validation
 }
-
 const Login: React.FC<Props> = ({ validation }: Props) => {
   const [state, setState] = useState({
     isLoading: false,
     email: '',
     password: '',
-    emailError: 'Campo obrigatório',
-    passwordError: 'Campo obrigatório',
+    emailError: '',
+    passwordError: '',
     mainError: ''
   })
+
   useEffect(() => {
-    validation.validate('email', state.email)
-  }, [state.email])
-  useEffect(() => {
-    validation.validate('password', state.password)
-  }, [state.password])
+    setState({
+      ...state,
+      emailError: validation.validate('email', state.email),
+      passwordError: validation.validate('password', state.password)
+    })
+  }, [state.email, state.password])
+
   return (
     <div className={Styles.login}>
       <LoginHeader />
@@ -40,5 +42,4 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
     </div>
   )
 }
-
 export default Login
